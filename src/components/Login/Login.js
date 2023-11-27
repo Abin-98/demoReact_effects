@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useReducer, useContext, useEffect } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -61,20 +61,20 @@ const Login = (props) => {
   });
 
   const authCtx = useContext(AuthContext);
+  const {isValid: emailIsValid}=emailState;
+  const {isValid: passwordIsValid}=passwordState;
+  const {isValid: collegeIsValid}=collegeState;
 
-  /*useEffect(() => {
+  useEffect(() => {
     const identifier = setTimeout(() => {
-      setFormIsValid(
-        enteredEmail.includes("@") &&
-          enteredPassword.trim().length > 6 &&
-          enteredClgName.trim().length > 0
-      );
-    }, 1000);
+      console.log('Checking form validity!');
+      setFormIsValid(emailIsValid && passwordIsValid && collegeIsValid);
+    }, 500);
 
     return () => {
       clearTimeout(identifier);
     };
-  }, [enteredEmail, enteredPassword, enteredClgName]);*/
+  }, [emailIsValid, passwordIsValid, collegeIsValid]);
 
   const emailChangeHandler = (event) => {
     //setEnteredEmail(event.target.value);
@@ -122,7 +122,7 @@ const Login = (props) => {
           id="email"
           type="email"
           label="E-Mail"
-          isValid={emailIsValid}
+          isValid={emailState.IsValid}
           value={emailState.value}
           onChange={emailChangeHandler}
           onBlur={validateEmailHandler}
@@ -131,16 +131,16 @@ const Login = (props) => {
           id="password"
           type="password"
           label="Password"
-          isValid={passwordIsValid}
+          isValid={passwordState.IsValid}
           value={passwordState.value}
           onChange={passwordChangeHandler}
           onBlur={validatePasswordHandler}
         />
           <Input
-          id="password"
-          type="password"
-          label="Password"
-          isValid={collegeIsValid}
+          id="college"
+          type="text"
+          label="college"
+          isValid={collegeState.IsValid}
           value={collegeState.value}
           onChange={clgNameChangeHandler}
           onBlur={validateClgNameHandler}
