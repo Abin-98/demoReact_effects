@@ -79,14 +79,13 @@ const Login = (props) => {
   const emailChangeHandler = (event) => {
     //setEnteredEmail(event.target.value);
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
-
-    setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
+   //(no need since we do in useEffect)  setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
     //setEnteredPassword(event.target.value);
     dispatchPassword({ type: "USER_INPUT", val: event.target.value });
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    //(no need since we do in useEffect) setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const validateEmailHandler = () => {
@@ -101,8 +100,8 @@ const Login = (props) => {
 
   const clgNameChangeHandler = (event) => {
     //setEnteredClgName(event.target.value);
-    dispatchPassword({ type: "USER_INPUT", val: event.target.value });
-    setFormIsValid(emailState.isValid && passwordState.isValid);
+    dispatchCollege({ type: "USER_INPUT", val: event.target.value });
+    //(no need since we do in useEffect) setFormIsValid(emailState.isValid && passwordState.isValid);
   };
 
   const validateClgNameHandler = () => {
